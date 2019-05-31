@@ -106,7 +106,7 @@ plt.show()
 
 <table>
   <tr><td> Original Graph </td><td>Random Vote Data</td><td>Initial Partition</td></tr>
-  <tr><td><img src=" " width = 300/></td><td><img src=" " width = 300/></td><td><img src=" " width = 300/></td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Original_Grid.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/PP_votes.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 300/></td></tr>
   </table>
   
 
@@ -192,7 +192,7 @@ plt.show()
 
 <table>
   <tr><td> ReCom Ensemble</td><td>Boundary Ensemble</td></tr>
-  <tr><td><img src=" " width = 300/></td><td><img src=" " width = 300/></td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/recom.gif" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/boundary.gif" width = 300/></td></tr>
   </table>
 
 
@@ -228,6 +228,13 @@ for z in range(4):
 
     plt.show()
 ```
+
+<table>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/ce.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/mm.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 300/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 300/></td></tr>
+  </table>
+
+    
 
 
 
