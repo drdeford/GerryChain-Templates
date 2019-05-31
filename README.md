@@ -1,5 +1,5 @@
 # GerryChain-Templates
-This repo provides an evolving set of instructional guides for using the <a href="https://github.com/mggg/GerryChain">GerryChain</a> package for generating dual graph partitions. More detailed technical documentation can be found <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and my introduction to the mathematics of Markov chains and MCMC for redistrcitng can be found here: (<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>) (<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>) (<a href="https://github.com/drdeford/MCMC_Intro">GitHub).
+This repo provides an evolving set of instructional guides for using the <a href="https://github.com/mggg/GerryChain">GerryChain</a> package for generating dual graph partitions. More detailed technical documentation can be found <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and my introduction to the mathematics of Markov chains and MCMC for redistrcitng can be found here: (<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>) (<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>) (<a href="https://github.com/drdeford/MCMC_Intro">GitHub</a>).
 
 <H2> Grids are fun! </H2>
 
