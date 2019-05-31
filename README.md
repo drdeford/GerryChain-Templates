@@ -192,7 +192,7 @@ plt.show()
 
 <table>
   <tr><td> ReCom Ensemble</td><td>Boundary Ensemble</td></tr>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/recom.gif" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/boundary.gif" width = 300/></td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/recom.gif" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/smaller_boundary.gif" width = 300/></td></tr>
   </table>
 
 
@@ -230,8 +230,9 @@ for z in range(4):
 ```
 
 <table>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/ce.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/mm.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 300/></td>
-        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 300/></td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/ce.png" width = 600/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/mm.png" width = 600/></td></tr>
+   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 600/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 600/></td></tr>
   </table>
 
     
