@@ -244,7 +244,8 @@ for z in range(4):
     plt.subplot(2, 2, 4)
     plt.hist(lists[z][1])
     plt.title("Boundary Flip Ensemble")
-
+    fig = plt.gcf()
+    fig.set_size_inches((8,7))
     plt.show()
 ```
 
