@@ -113,6 +113,25 @@ plt.show()
 Next we configure the partitions, updaters, and constraints. 
 
 ```python
+
+####CONFIGURE UPDATERS
+
+def step_num(partition):
+    parent = partition.parent
+
+    if not parent:
+        return 0
+
+
+    return parent["step_num"] + 1
+
+updaters = {'population': Tally('population'),
+                    'cut_edges': cut_edges,
+                    'step_num': step_num,
+                    "Pink-Purple": Election("Pink-Purple", {"Pink":"pink","Purple":"purple"})}                  
+                    
+                    
+
 #########BUILD PARTITION
 
 grid_partition = Partition(graph,assignment=cddict,updaters=updaters)
@@ -141,7 +160,7 @@ initial_state=grid_partition, total_steps=10000)
 
 ```
 
-Finally, we run two chains, one with each proposal method, and record av ariety of statistics.
+Finally, we run two chains, one with each proposal method, and record a variety of statistics. The final state of each of the two chains will be displayed. Notice that even though the ReCom chain only takes 100 steps, it travels much further than the 10,000 step boundary chain. 
 
 ```python
 #########Run MARKOV CHAINS
