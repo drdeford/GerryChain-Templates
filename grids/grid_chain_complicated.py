@@ -35,11 +35,9 @@ from gerrychain.accept import always_accept
 from gerrychain.updaters import Election,Tally,cut_edges
 from gerrychain import GeographicPartition
 from gerrychain.partition import Partition
-#from gerrychain.scores import mean_median
-#from tree_proposals import recom
 from functools import partial
 import networkx as nx
-#from sc_merge import *
+
 
 
 
@@ -70,13 +68,13 @@ def slow_reversible_propose(partition):
     
     flips = {flip: random.choice(neighbor_assignments)}
 
-    return flips
+    return partition.flip(flips)
 
 def reversible_propose(partition):
     boundaries1  = {x[0] for x in partition["cut_edges"]}.union({x[1] for x in partition["cut_edges"]})
    
     flip = random.choice(list(boundaries1))
-    return {flip:-partition.assignment[flip]}
+    return partition.flip({flip:-partition.assignment[flip]})
 
 
 def cut_accept(partition):
@@ -117,10 +115,10 @@ def annealing_cut_accept2(partition):
     t = partition["step_num"]
     
     
-    if t <100000:
+    if t <10000:
         beta = 0  
-    elif t<400000:
-        beta = (t-100000)/100000 #was 50000)/50000
+    elif t<40000:
+        beta = (t-10000)/10000 #was 50000)/50000
     else:
         beta = 3
         
@@ -147,32 +145,24 @@ def boundary_condition(partition):
 gn=15
 k=4
 ns=200
+p=.4
 
-for exp_num in [22,35]: #range(22,31):
+for exp_num in [40,20,1]: #range(22,31):
 
-    for pop_bal in [10,20,30]:#[10,15,20,25,30,35,40,45,50]
+    for pop_bal in [5,10,50]:#[10,15,20,25,30,35,40,45,50]
         base=exp_num/10#1/math.pi
         graph=nx.grid_graph([k*gn,k*gn])
         
-        #graph=nx.grid_graph([10,30])
 
-        #add_data_to_graph()
-        #ctemp=0
         for e in graph.edges():
             graph[e[0]][e[1]]["shared_perim"]=1
-            #ctemp+=1
-
-           
-
-        #print(ctemp)
-
 
 
 
         graph.remove_nodes_from([(0,0),(0,k*gn-1),(k*gn-1,0),(k*gn-1,k*gn-1)])
-        #cddict = {x: 1-2*int(x[0]/gn)  for x in graph.nodes()}
+
         cddict = {x: int(x[0]/gn)  for x in graph.nodes()}
-        #print(vdict)
+
 
 
 
@@ -182,7 +172,7 @@ for exp_num in [22,35]: #range(22,31):
             graph.node[n]["last_flipped"]=0
             graph.node[n]["num_flips"]=0
            
-            if random.random()<.45:
+            if random.random()<p:
                 graph.node[n]["pink"]=1
                 graph.node[n]["purple"]=0
             else:
@@ -196,14 +186,6 @@ for exp_num in [22,35]: #range(22,31):
                 graph.node[n]["boundary_node"]=False
 
 
-
-               
-
-        #turn into torus
-
-        #for i in range(gn):
-           
-               
                
         #this part adds queen adjacency
         #for i in range(gn-1):
@@ -217,7 +199,6 @@ for exp_num in [22,35]: #range(22,31):
                    
                
 
-        #def boundaries(partition):
                
            
 
@@ -233,24 +214,18 @@ for exp_num in [22,35]: #range(22,31):
         #election_updaters=dict()
         #election_updaters["Pink-Purple"]=Election("Pink-Purple",{"Pink":"pink","Purple":"purple"},alias="Pink-Purple")
 
-        #gp= Partition(graph,assignment=cddict,updaters={**updaters,**election_updaters})
-
-
-
-        #compactness_bound = UpperBound(
-        #    lambda p: len(p["cut_edges"]), 2 * len(gp["cut_edges"])
-        #)
 
 
         gp3= Partition(graph,assignment=cddict,updaters=updaters)
 
 
         ideal_population = sum(gp3["population"].values()) / len(gp3)
+        
         proposal = partial(recom,
                        pop_col="population",
                        pop_target=ideal_population,
-                       epsilon=0.05,
-                       node_repeats=2
+                       epsilon=0.02,
+                       node_repeats=1
                       )
 
 
@@ -259,13 +234,14 @@ for exp_num in [22,35]: #range(22,31):
 
 
         g3chain=MarkovChain(proposal,#propose_chunk_flip,
-                           Validator([popbound]),accept=always_accept,initial_state=gp3, total_steps=100)
+                           Validator([popbound]),accept=always_accept,initial_state=gp3,        total_steps=100)
         
         t=0
         for part3 in g3chain:
             t+=1
            
-        print("finished tree")
+        print("finished tree walk")
+        
         pos_dict={n:n for n in graph.nodes()}
         pos=pos_dict
 
@@ -274,55 +250,32 @@ for exp_num in [22,35]: #range(22,31):
         plt.title("Starting Point")
         nx.draw(graph,pos,node_color=[part3.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Starting Point")
-        plt.savefig("./Outputs/lorenzo_test/annealing/test3/start2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/exp_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
           
 
 
-    
-            
-        
-
-
-        #gp= Partition(graph,assignment=cddict,updaters=updaters)
-        gp= Partition(graph,assignment=part3.assignment,updaters=updaters)
+        gp = Partition(graph,assignment=dict(part3.assignment),updaters=updaters)
         
         
         popbound=within_percent_of_ideal_population(gp,pop_bal/100)
-        
-        cutbound = UpperBound(number_cut_edges, 4*len(gp["cut_edges"]))
-        #
 
-        #pop_target = sum(gp["population"].values()) / len(gp)
 
-        #treeprop = partial(
-        #            recom, pop_col="population", pop_target=pop_target, epsilon=.2, node_repeats=1
-        #        )
-
-        #[single_flip_contiguous,popbound,compactness_bound]
-        #propose_random_flip#treeprop
         gchain=MarkovChain(slow_reversible_propose, #propose_random_flip,#propose_chunk_flip, # ,
         Validator([single_flip_contiguous,popbound]), accept=annealing_cut_accept2,#aca,#cut_accept,#always_accept,#
-                           initial_state=gp, total_steps=500000)
+                           initial_state=gp, total_steps=50000)
 
 
         pos_dict={n:n for n in graph.nodes()}
         pos=pos_dict
 
-        #plt.figure()
 
-        #nx.draw(graph,pos,node_color=[graph.node[x]["pink"] for x in graph.nodes()],node_size=100)
-        #plt.title("Voting Data")
-        #plt.show()
-
-        mm_hist=[]
         ce_hist=[]
         t=0
         cuts = []
         for part in gchain:
-            #TOO SLOW!
-            #for n in graph.nodes():
-            #    graph.node[n]["part_sum"]+=part.assignment[n]
+
+
             cuts.append(len(part["cut_edges"]))
             if part.flips is not None:
                 f = list(part.flips.keys())[0]
@@ -340,16 +293,17 @@ for exp_num in [22,35]: #range(22,31):
             #if t%200==0:
             #    plt.figure()
             #    nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns)#,cmap="tab20")
-            #    #plt.savefig("./GRIDn_"+str(int(t/1000))+".png")
+            #    #plt.savefig("./plots/GRIDn_"+str(int(t/1000))+".png")
             #    plt.show()
             t+=1
-            if t%50000 == 0:
+            if t%5000 == 0:
                 print(t)
                 plt.figure()
                 plt.title(str(t) +"Steps")
                 nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
                 plt.title("Ending Point")
-                plt.savefig("./Outputs/lorenzo_test/annealing/test3/middle"+str(t)+"2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+                plt.savefig("./plots/middle"+str(t)+"2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+                plt.close()
             #print(t)
 
         for n in graph.nodes():
@@ -368,14 +322,14 @@ for exp_num in [22,35]: #range(22,31):
         plt.title("Ending Point")
         nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Ending Point")
-        plt.savefig("./Outputs/lorenzo_test/annealing/test3/end2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/end2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         #plt.show()
 
 #        plt.figure()
 #        plt.title("Weighted Community Assignment")
 #        nx.draw(graph,pos,node_color=[graph.nodes[x]["part_sum"] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="jet")
 #        plt.title("Weighted Community Assignment")
-#        plt.savefig("./Outputs/lorenzo_test/annealing/test3/wca2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+#        plt.savefig(".//plotswca2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
 #        #plt.show()
     #
 
@@ -384,41 +338,21 @@ for exp_num in [22,35]: #range(22,31):
         nx.draw(graph,pos,node_color=[graph.nodes[x]["num_flips"] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="jet")
         plt.title("Flips")
 
-        plt.show()
+        plt.savefig("./plots/flips_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.close()
 
 
         plt.figure()
         plt.title("Cut Lengths")
         plt.plot(cuts)
 
-        plt.show()
+        plt.savefig("./plots/cuts_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.close()
 
         plt.figure()
         plt.title("Cut Lengths")
         sns.distplot(cuts,bins=100,kde=False)
 
-        plt.show()
+        plt.savefig("./plots/cuthist_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.close()
 
-        """
-        gp2= Partition(graph,assignment=part.assignment,updaters=updaters)
-
-        g2chain=MarkovChain(propose_spectral_merge, #(propose_align_all_cont_merge,#propose_chunk_flip,
-                           Validator([]),accept=always_accept,initial_state=gp2, total_steps=100)
-
-        t=1
-        for part2 in g2chain:
-            plt.figure()
-            nx.draw(graph,pos,node_color=[part2.assignment[x] for x in graph.nodes()],node_size=600,cmap="tab20")
-            plt.savefig("./lorenzo_test/t_"+str(exp_num)+"_"+str(t)+".png")
-            plt.close()
-            t+=1
-       
-
-    #plt.figure()
-
-    #plt.hist(mm_hist)
-    #plt.axvline(x=mm_hist[0],color='r',label="Initial Value")
-    #plt.legend()
-    #plt.show()
-       
-    """
