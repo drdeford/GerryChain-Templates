@@ -13,7 +13,6 @@ import numpy as np
 import csv
 from networkx.readwrite import json_graph
 import math
-import seaborn as sns
 from functools import partial
 
 # Imports for GerryChain components
