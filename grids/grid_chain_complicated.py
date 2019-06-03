@@ -13,7 +13,6 @@ import numpy as np
 import csv
 from networkx.readwrite import json_graph
 import math
-import seaborn as sns
 from functools import partial
 
 # Imports for GerryChain components
@@ -250,7 +249,7 @@ for exp_num in [40,20,1]: #range(22,31):
         plt.title("Starting Point")
         nx.draw(graph,pos,node_color=[part3.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Starting Point")
-        plt.savefig("./plots/exp_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/exp_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
           
 
@@ -302,7 +301,7 @@ for exp_num in [40,20,1]: #range(22,31):
                 plt.title(str(t) +"Steps")
                 nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
                 plt.title("Ending Point")
-                plt.savefig("./plots/middle"+str(t)+"2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+                plt.savefig("./plots/complicated/middle"+str(t)+"2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
                 plt.close()
             #print(t)
 
@@ -322,7 +321,7 @@ for exp_num in [40,20,1]: #range(22,31):
         plt.title("Ending Point")
         nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Ending Point")
-        plt.savefig("./plots/end2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/end2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         #plt.show()
 
 #        plt.figure()
@@ -338,7 +337,7 @@ for exp_num in [40,20,1]: #range(22,31):
         nx.draw(graph,pos,node_color=[graph.nodes[x]["num_flips"] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="jet")
         plt.title("Flips")
 
-        plt.savefig("./plots/flips_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/flips_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
 
 
@@ -346,13 +345,13 @@ for exp_num in [40,20,1]: #range(22,31):
         plt.title("Cut Lengths")
         plt.plot(cuts)
 
-        plt.savefig("./plots/cuts_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/cuts_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
 
         plt.figure()
         plt.title("Cut Lengths")
         sns.distplot(cuts,bins=100,kde=False)
 
-        plt.savefig("./plots/cuthist_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/cuthist_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
 

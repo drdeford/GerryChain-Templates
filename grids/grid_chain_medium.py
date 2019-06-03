@@ -11,7 +11,6 @@ import numpy as np
 import csv
 from networkx.readwrite import json_graph
 import math
-import seaborn as sns
 from functools import partial
 import networkx as nx
 import numpy as np
@@ -164,10 +163,25 @@ final_partition = Partition(graph,assignment=part2.assignment,updaters=updaters)
 
 
 #ADD CONSTRAINTS
-popbound=within_percent_of_ideal_population(final_partition,.1)                      
+popbound=within_percent_of_ideal_population(final_partition,.3)                      
 
 
 #########Setup Spectral Proposal
+
+def spectral_cut(G):
+    nlist = list(G.nodes())
+    n = len(nlist)
+    AM = nx.adjacency_matrix(G)
+    NLM = (nx.normalized_laplacian_matrix(G)).todense()
+    #LM = (nx.laplacian_matrix(G)).todense()
+    NLMva, NLMve = LA.eigh(NLM)
+    NFv = NLMve[:,1]
+    xNFv = [NFv.item(x) for x in range(n)]
+    node_color = [xNFv[x] > 0 for x in range(n)]
+   
+    clusters={nlist[x]:node_color[x] for x in range(n)}
+
+    return clusters
 
 def propose_spectral_merge(partition):
     edge = random.choice(tuple(partition['cut_edges']))
@@ -199,26 +213,13 @@ def propose_spectral_merge(partition):
 
 
 
-def spectral_cut(G):
-    nlist = list(G.nodes())
-    n = len(nlist)
-    AM = nx.adjacency_matrix(G)
-    NLM = (nx.normalized_laplacian_matrix(G)).todense()
-    #LM = (nx.laplacian_matrix(G)).todense()
-    NLMva, NLMve = LA.eigh(NLM)
-    NFv = NLMve[:,1]
-    xNFv = [NFv.item(x) for x in range(n)]
-    node_color = [xNFv[x] > 0 for x in range(n)]
-   
-    clusters={nlist[x]:node_color[x] for x in range(n)}
 
-    return clusters
 
                       
 #######BUILD AND RUN FINAL MARKOV CHAIN
 
 
-final_chain=MarkovChain(propose_spectral_merge, Validator([single_flip_contiguous, popbound]),accept=always_accept,
+final_chain=MarkovChain(propose_spectral_merge, Validator([]),accept=always_accept,
 initial_state=final_partition, total_steps=100)
 
 
