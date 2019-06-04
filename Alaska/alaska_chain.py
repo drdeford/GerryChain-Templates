@@ -21,15 +21,14 @@ from gerrychain.constraints.validity import within_percent_of_ideal_population
 from gerrychain.proposals import recom
 from functools import partial
 
-
 from FKT import FKT
 
-from enum_matchings import enumerate_matchings
+
 
 whole_start = time.time()
 
 #Initialization
-df = gpd.read_file("./data/AK_precincts_ns/AK_precincts_ns/AK_precincts_ns.shp")
+df = gpd.read_file("./AK_precincts_ns/AK_precincts_ns/AK_precincts_ns.shp")
 df["nAMIN"] = df["TOTPOP"]-df["AMIN"]
 elections = [
     Election("GOV18x", {"Democratic": "GOV18D_x", "Republican": "GOV18R_x"}),
@@ -39,7 +38,8 @@ elections = [
     Election("Native_percent", {"Native":"AMIN", "nonNative":"nAMIN"})
 ]
 
-my_updaters = {"population": updaters.Tally("POPULATION", alias="population")}
+my_updaters = {"population": updaters.Tally("POPULATION", alias="population"),
+"cut_edges":cut_edges}
 
 election_updaters = {election.name: election for election in elections}
 my_updaters.update(election_updaters)
@@ -53,7 +53,7 @@ my_updaters.update(election_updaters)
 #Tightest Alaska
 print("Building Tight Graph")
 
-G_tight = Graph.from_file("./data/AK_precincts_ns/AK_precincts_ns/AK_precincts_ns.shp")
+G_tight = Graph.from_file("./AK_precincts_ns/AK_precincts_ns/AK_precincts_ns.shp")
 G_tight.join(df,columns= ["nAMIN"])
 
 idict={}
@@ -85,7 +85,7 @@ print("Starting Ensemble Analysis")
 ensemble_time = time.time()
 
 
-ps = [initial_tight]
+
 
 GOV18ns= sorted((0.5187406297776442, 0.3916434540240218, 0.23378661089760477,
           0.561916167590201, 0.5277943813115976, 0.3967808623758262, 
@@ -157,11 +157,13 @@ Native=sorted((0.14453345368385423, 0.04791972037433758, 0.04153228088043909,
         0.4281292984869326, 0.8349481363273681, 0.8371329976806019,
         0.6643768400392541))
 
+types = ["tight"]
+c='k'
 
 for z in range(1):
     
     
-    initial_partition = ps[z]
+    initial_partition = Partition(G_tight,assignment=df["HDIST"],updaters=my_updaters)
     
     
     
@@ -189,10 +191,10 @@ for z in range(1):
     ],
     accept=accept.always_accept,
     initial_state=initial_partition,
-    total_steps=100000
+    total_steps=100
         )
 
-    print("Started ", types[z], "chain")
+    print("Started chain")
 
     
     percents1 = []
@@ -227,7 +229,10 @@ for z in range(1):
     minen = 0
     maxmn = 0
     minmn = 0
-
+    zerom = 0
+    zeroA = np.matrix([[0,0],[0,0]])
+    zerot = 0
+    zeroe = 0
 
     t=0
     for c_part in chain:
