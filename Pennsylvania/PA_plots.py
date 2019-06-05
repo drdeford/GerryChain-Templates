@@ -162,8 +162,8 @@ for j in range(14):
 
 
     plt.plot(egs[j,:])
-    plt.plot([0,max_steps],[eegs[j],eegs[j]],color='purple',label="2011")
-    plt.plot([0,max_steps],[regs[j],regs[j]],color='orange',label="Remedial")
+    plt.plot([0,max_steps],[-eegs[j],-eegs[j]],color='purple',label="2011")
+    plt.plot([0,max_steps],[-regs[j],-regs[j]],color='orange',label="Remedial")
     plt.plot([0,max_steps],[np.mean(egs[j,:]),np.mean(egs[j,:])],color='g',label="Ensemble Mean")
     plt.title(plan_name + "Plan" + election_names[j])
     #plt.axhline(y=.104,color='orange',label="SM-Cong")
@@ -192,8 +192,8 @@ for j in range(14):
 
 
     plt.plot(mms[j,:])
-    plt.plot([0,max_steps],[emms[j],emms[j]],color='purple',label="2011")
-    plt.plot([0,max_steps],[rmms[j],rmms[j]],color='orange',label="Remedial")
+    plt.plot([0,max_steps],[-emms[j],-emms[j]],color='purple',label="2011")
+    plt.plot([0,max_steps],[-rmms[j],-rmms[j]],color='orange',label="Remedial")
     plt.plot([0,max_steps],[np.mean(mms[j,:]),np.mean(mms[j,:])],color='g',label="Ensemble Mean")
     #plt.title(plan_name + "Plan" + election_names[j])
     #plt.axhline(y=.032 ,color='orange',label="SM-Cong")
