@@ -319,6 +319,7 @@ for z in range(4):
  <tr><td>Snapshot 1</td><td>Snapshot 2</td><td>Snapshot 3</td><td>Snapshot 4</td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot100.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td> <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot300.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot400.png" width = 200/></td></tr>
+    
 <tr><td>Snapshot 5</td><td>Snapshot 6</td><td>Snapshot 7</td><td>Snapshot 8</td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot700.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
@@ -328,9 +329,8 @@ for z in range(4):
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
         
         
-<tr><td colspan="2">Democratic %</td><td>Seats Trae</td><td>Seats Hist</td></tr>
-  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td>
-        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
+<tr><td colspan="2">Democratic %</td><td>Seats trace</td><td>Seats histogram</td></tr>
+  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
 
 <tr><td>Mean Median trace</td><td>Mean Median histogram</td><td>Efficiency Gap trace</td><td>Efficiency Gap histogram </td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_hist.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_trace.png" width = 200/></td>
