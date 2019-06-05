@@ -315,17 +315,17 @@ for z in range(4):
   
   The Pennsylvania example explores a different approach to data processing. Here the dual graph is built directly from a .json file and no modifications are needed to make it contiguous. We start with the plan that was enacted in 2011 and take 1,000 ReCom steps while recording partisan statistics for 14 different elections. Every 100 steps, these values are written to file, along with a lot of the current plan. Once the chain has finished, the additional python file in the directory reads in the various outputs and creates box plots, traces, and histograms for each of the elections, as well as the boundary length, number of county splits, and population deviation. We have found this approach very useful for long runs, say 1,000,000 steps writing to file every 10,000 or so seems to keep the overhead RAM usage in a reasonable range. 
   
-    <table>
-    <tr><td>Snapshot 1</td><td>Snapshot 2</td><td>Snapshot 3</td><td>Snapshot 4</td>
+<table>
+ <tr><td>Snapshot 1</td><td>Snapshot 2</td><td>Snapshot 3</td><td>Snapshot 4</td>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot100.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
    <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot300.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot400.png" width = 200/></td></tr>
-            <tr><td>Snapshot 5</td><td>Snapshot 6</td><td>Snapshot 7</td><td>Snapshot 8</td>
+<tr><td>Snapshot 5</td><td>Snapshot 6</td><td>Snapshot 7</td><td>Snapshot 8</td>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td></tr>
    <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot700.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
         
-             <tr><td>Snapshot 9</td><td>Snapshot 10</td><td>Boundary Trace</td><td>Boundary Histogram</td>
+<tr><td>Snapshot 9</td><td>Snapshot 10</td><td>Boundary Trace</td><td>Boundary Histogram</td>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot900.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td></tr>
    <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
