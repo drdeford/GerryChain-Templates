@@ -1,7 +1,30 @@
 # GerryChain-Templates
 This repo provides an evolving set of instructional guides for using the <a href="https://github.com/mggg/GerryChain">GerryChain</a> package for generating dual graph partitions. More detailed technical documentation can be found <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and my introduction to the mathematics of Markov chains and MCMC for redistrcitng can be found here: (<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>) (<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>) (<a href="https://github.com/drdeford/MCMC_Intro">GitHub</a>).
 
-<H2 Overview />
+<H2> Overview </H2>
+These templates assume that you have already installed GerryChain (see <a href="https://github.com/mggg/GerryChain">here</a> or <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> for directions) and are ready to start building your own ensembles. Since some of the examples use real-world data, you should clone this repo to your computer - this will also make it easy to get access to updates to the templates. Once you have downloaded everything you should be able to run the templates individually by navigating to the appropriate subfolder and entering: 
+
+```python
+python grid_chain_simple.py
+```
+
+The current templates are:
+<ul>
+    <li> Grids</li>
+    <ul> 
+        <li><b>  grid_chain_simple.py </b> </li>
+        <li><b>  grid_chain_medium.py </b> </li>
+        <li><b>  grid_chain_complicated.py </b> </li>
+    </ul>
+    <li> Pennsylvania</li>
+    <ul>
+        <li> <b>PA_Chain.py</b></li>
+    </ul>
+    <li> Alaska</li>
+    <ul>
+        <li> <b>AK_Chain.py</b></li>
+    </ul>
+</ul>
 
 <H2> Grids are fun! </H2>
 
