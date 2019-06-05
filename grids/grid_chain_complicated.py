@@ -7,13 +7,14 @@ import geopandas as gp
 import functools
 import datetime
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
 from networkx.readwrite import json_graph
 import math
 from functools import partial
+import seaborn as sns
 
 # Imports for GerryChain components
 # You can look at the list of available functions in each
@@ -114,10 +115,10 @@ def annealing_cut_accept2(partition):
     t = partition["step_num"]
     
     
-    if t <10000:
+    if t <100000:
         beta = 0  
-    elif t<40000:
-        beta = (t-10000)/10000 #was 50000)/50000
+    elif t<400000:
+        beta = (t-100000)/100000 #was 50000)/50000
     else:
         beta = 3
         
@@ -141,8 +142,8 @@ def boundary_condition(partition):
     return out   
 
 
-gn=15
-k=4
+gn=10
+k=5
 ns=200
 p=.4
 
@@ -249,7 +250,7 @@ for exp_num in [40,20,1]: #range(22,31):
         plt.title("Starting Point")
         nx.draw(graph,pos,node_color=[part3.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Starting Point")
-        plt.savefig("./plots/complicated/exp_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/start_exp_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         plt.close()
           
 
@@ -262,7 +263,7 @@ for exp_num in [40,20,1]: #range(22,31):
 
         gchain=MarkovChain(slow_reversible_propose, #propose_random_flip,#propose_chunk_flip, # ,
         Validator([single_flip_contiguous,popbound]), accept=annealing_cut_accept2,#aca,#cut_accept,#always_accept,#
-                           initial_state=gp, total_steps=50000)
+                           initial_state=gp, total_steps=500000)
 
 
         pos_dict={n:n for n in graph.nodes()}
@@ -295,7 +296,7 @@ for exp_num in [40,20,1]: #range(22,31):
             #    #plt.savefig("./plots/GRIDn_"+str(int(t/1000))+".png")
             #    plt.show()
             t+=1
-            if t%5000 == 0:
+            if t%50000 == 0:
                 print(t)
                 plt.figure()
                 plt.title(str(t) +"Steps")
@@ -321,7 +322,7 @@ for exp_num in [40,20,1]: #range(22,31):
         plt.title("Ending Point")
         nx.draw(graph,pos,node_color=[part.assignment[x] for x in graph.nodes()],node_size=ns,node_shape='s',cmap="tab20")
         plt.title("Ending Point")
-        plt.savefig("./plots/complicated/end2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
+        plt.savefig("./plots/complicated/newend2_"+str(exp_num)+"_"+str(pop_bal)+"pop.png")
         #plt.show()
 
 #        plt.figure()

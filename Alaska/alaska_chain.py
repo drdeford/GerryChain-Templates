@@ -42,6 +42,7 @@ my_updaters = {"population": updaters.Tally("POPULATION", alias="population"),
 "cut_edges":cut_edges}
 
 election_updaters = {election.name: election for election in elections}
+
 my_updaters.update(election_updaters)
 
 
