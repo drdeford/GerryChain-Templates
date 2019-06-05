@@ -192,7 +192,7 @@ for z in range(1):
     ],
     accept=accept.always_accept,
     initial_state=initial_partition,
-    total_steps=100
+    total_steps=10000
         )
 
     print("Started chain")
