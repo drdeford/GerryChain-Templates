@@ -114,10 +114,10 @@ def annealing_cut_accept2(partition):
     t = partition["step_num"]
     
     
-    if t <10000:
+    if t <100000:
         beta = 0  
-    elif t<40000:
-        beta = (t-10000)/10000 #was 50000)/50000
+    elif t<400000:
+        beta = (t-100000)/100000 #was 50000)/50000
     else:
         beta = 3
         
@@ -262,7 +262,7 @@ for exp_num in [40,20,1]: #range(22,31):
 
         gchain=MarkovChain(slow_reversible_propose, #propose_random_flip,#propose_chunk_flip, # ,
         Validator([single_flip_contiguous,popbound]), accept=annealing_cut_accept2,#aca,#cut_accept,#always_accept,#
-                           initial_state=gp, total_steps=50000)
+                           initial_state=gp, total_steps=500000)
 
 
         pos_dict={n:n for n in graph.nodes()}
