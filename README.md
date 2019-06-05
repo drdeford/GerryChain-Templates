@@ -282,12 +282,21 @@ for z in range(4):
   
   <H2> More Grids </H2>
   
-  The two other grid chains use more complicated tools to generate districting plans with short boundary lengths. Both examples start by using a short (100 step) ReCom run to turn the initial vertical stripes partition into a random starting point. Then, they use a longer  (10,000 step) boundary flip proposal to generate a very wiggly districting plan with lots of tentacles. To generate nicer looking final plans, the medium chain uses a spectral clustering Recom step, while the complicated chain uses simulated annealing on the boundary proposal. 
-  
+  The two other grid chains use more complicated tools to generate districting plans with short boundary lengths. Both examples start by using a short (100 step) ReCom run to turn the initial vertical stripes partition into a random starting point. Then, they use a longer  (10,000 step) boundary flip proposal to generate a very wiggly districting plan with lots of tentacles. To generate nicer looking final plans, the medium chain uses a spectral clustering Recom step:
   
    <table>
   <tr><td> Initial Partition </td><td>Short Recom</td><td>Long Boundary</td><td>Spectral Cleanup</td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_tree.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_boundary.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/spectral_step20.png" width = 200/></td></tr>
+  </table>
+ while the complicated chain uses simulated annealing on the boundary proposal:
+  
+   <table>
+  <tr><td> Initial Partition </td><td>Short Recom</td><td>50k boundary steps </td><td>100k boundary steps</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/start_exp_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle1000002_40_5pop.png" width = 200/></td></tr>
+    <tr><td> 150 k boundary steps </td><td>200k boundary steps</td><td>250k boundary steps </td><td>300k boundary steps</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle1500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle2000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle2500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle3000002_40_5pop.png" width = 200/></td></tr>
+    <tr><td> 400 k boundary steps </td><td>500k boundary steps</td><td>Flipped Nodes</td><td>Boundary length</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle4000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle5000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/flips_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cuts_40_5pop.png" width = 200/></td></tr>
   </table>
 
 
