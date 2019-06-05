@@ -1,6 +1,31 @@
 # GerryChain-Templates
 This repo provides an evolving set of instructional guides for using the <a href="https://github.com/mggg/GerryChain">GerryChain</a> package for generating dual graph partitions. More detailed technical documentation can be found <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and my introduction to the mathematics of Markov chains and MCMC for redistrcitng can be found here: (<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>) (<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>) (<a href="https://github.com/drdeford/MCMC_Intro">GitHub</a>).
 
+<H2> Overview </H2>
+These templates assume that you have already installed GerryChain (see <a href="https://github.com/mggg/GerryChain">here</a> or <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> for directions) and are ready to start building your own ensembles. Since some of the examples use real-world data, you should clone this repo to your computer - this will also make it easy to get access to updates to the templates. Once you have downloaded everything you should be able to run the templates individually by navigating to the appropriate subfolder and entering: 
+
+```python
+python grid_chain_simple.py
+```
+Here are links to the current templates:
+<ul>
+    <li><b> Grids</b></li>
+    <ul> 
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_simple.py">grid_chain_simple.py </a> </li>
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_medium.py">  grid_chain_medium.py </a> </li>
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_complicated.py">  grid_chain_complicated.py </a> </li>
+    </ul>
+    <li><b> Pennsylvania</b></li>
+    <ul>
+        <li> <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/Pennsylvania/PA_chain.py">PA_Chain.py</a></li>
+    </ul>
+    <li><b> Alaska</b></li>
+    <ul>
+        <li> <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/Alaska/AK_chain.py">AK_Chain.py</a></li>
+    </ul>
+</ul>
+More details about the contents of these files are provided below the simple grids example. 
+
 <H2> Grids are fun! </H2>
 
 The best place to start is with the <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_simple.py">simple grids example</a>. This template breaks the code into pieces, building the graph and partition components separately before doing a couple of small runs to compare ReCom to Flip. We start by importing the packages we need:
@@ -253,8 +278,27 @@ for z in range(4):
    <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 600/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 600/></td></tr>
   </table>
+  
+  
+  <H2> More Grids </H2>
+  
+  The two other grid chains use more complicated tools to generate districting plans with short boundary lengths. Both examples start by using a short (100 step) ReCom run to turn the initial vertical stripes partition into a random starting point. Then, they use a longer  (10,000 step) boundary flip proposal to generate a very wiggly districting plan with lots of tentacles. To generate nicer looking final plans, the medium chain uses a spectral clustering Recom step:
+  
+   <table>
+  <tr><td> Initial Partition </td><td>Short Recom</td><td>Long Boundary</td><td>Spectral Cleanup</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_tree.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_boundary.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/spectral_step20.png" width = 200/></td></tr>
+  </table>
+ while the complicated chain uses simulated annealing on the boundary proposal:
+  
+   <table>
+  <tr><td> Initial Partition </td><td>Short Recom</td><td>50k boundary steps </td><td>100k boundary steps</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/start_exp_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle1000002_40_5pop.png" width = 200/></td></tr>
+    <tr><td> 150 k boundary steps </td><td>200k boundary steps</td><td>250k boundary steps </td><td>300k boundary steps</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle1500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle2000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle2500002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle3000002_40_5pop.png" width = 200/></td></tr>
+    <tr><td> 400 k boundary steps </td><td>500k boundary steps</td><td>Flipped Nodes</td><td>Boundary length</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle4000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle5000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/flips_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cuts_40_5pop.png" width = 200/></td></tr>
+  </table>
 
-    
 
 
 
