@@ -7,14 +7,14 @@ import geopandas as gp
 import functools
 import datetime
 import matplotlib
-#matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
 from networkx.readwrite import json_graph
 import math
 from functools import partial
-
+import seaborn as sns
 # Imports for GerryChain components
 # You can look at the list of available functions in each
 # corresponding .py file.
