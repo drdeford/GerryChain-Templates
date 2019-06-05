@@ -288,7 +288,7 @@ for z in range(4):
   <tr><td> Initial Partition </td><td>Short Recom</td><td>Long Boundary</td><td>Spectral Cleanup</td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_tree.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/end_of_boundary.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/spectral_step20.png" width = 200/></td></tr>
   </table>
- while the complicated chain uses simulated annealing on the boundary proposal:
+ while the complicated chain uses simulated annealing on the boundary proposal. The target distribution is proportional to a base x raised to the negative boundary length multiplied by the inverse temperature. This chain runs significantly longer, the first 100k steps use the regular boundary walk (corresponding to an inverse temperature of zero). It then begins the annealing process, over the next 300k steps it linearly interpolates the inverse temperature from 0 to 3, and then spends the final 100k steps at 3. The figures below show the evolution of the chain as well as a heatmap of the number of times each node is flipped and the boundary length values. The code is currently configured to try this experiment with three different exponential bases (.1,2,4) and three different population tolerances (5%, 10%, 50%) to get a better sense for how these constraints interact. 
   
    <table>
   <tr><td> Initial Partition </td><td>Short Recom</td><td>50k boundary steps </td><td>100k boundary steps</td></tr>
@@ -299,6 +299,43 @@ for z in range(4):
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle4000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle5000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/flips_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cuts_40_5pop.png" width = 200/></td></tr>
   </table>
 
+
+  <H2> Alaska </H2>
+  
+  The Alaksa chain reproduces some of the experiments that were carried out in <a href="https://github.com/gerrymandr/Alaska">this paper</a>. It begins by constructing a dual graph for the state directly from the shapefile and then adds in some extra edges to the dual graph to connect some islands and deletes some spurious edges that cross the water around Anchorage. The chain run itself is a pretty standard ReCom setup with a population constraint and a boundary length constraint. After the run finishes, it provides box plots and seats histograms for four different election data sets as well as the proportion of Native populations in each district. These plots are automatically written to file with some summary values and .json files containing the underlying data. 
+  
+  <table>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/ce.png" width = 600/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/mm.png" width = 600/></td></tr>
+   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 600/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 600/></td></tr>
+  </table>
+
+  
+  <H2> Pennsylvania </H2>
+  
+  The Pennsylvania example explores a different approach to data processing. Here the dual graph is built directly from a .json file and no modifications are needed to make it contiguous. We start with the plan that was enacted in 2011 and take 1,000 ReCom steps while recording partisan statistics for 14 different elections. Every 100 steps, these values are written to file, along with a lot of the current plan. Once the chain has finished, the additional python file in the directory reads in the various outputs and creates box plots, traces, and histograms for each of the elections, as well as the boundary length, number of county splits, and population deviation. We have found this approach very useful for long runs, say 1,000,000 steps writing to file every 10,000 or so seems to keep the overhead RAM usage in a reasonable range. 
+  
+    <table>
+    <tr><td>Snapshot 1</td><td>Snapshot 2</td><td>Snapshot 3</td><td>Snapshot 4</td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot100.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
+   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot300.png" width = 200/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot400.png" width = 200/></td></tr>
+            <tr><td>Snapshot 5</td><td>Snapshot 6</td><td>Snapshot 7</td><td>Snapshot 8</td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td></tr>
+   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot700.png" width = 200/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
+        
+             <tr><td>Snapshot 9</td><td>Snapshot 10</td><td>Boundary Trace</td><td>Boundary Histogram</td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot900.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td></tr>
+   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td>
+        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
+
+  </table>
+
+
+  
+  
+  
 
 
 
