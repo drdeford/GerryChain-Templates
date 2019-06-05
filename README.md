@@ -302,14 +302,12 @@ for z in range(4):
 
   <H2> Alaska </H2>
   
-  The Alaksa chain reproduces some of the experiments that were carried out in <a href="https://github.com/gerrymandr/Alaska">this paper</a>. It begins by constructing a dual graph for the state directly from the shapefile and then adds in some extra edges to the dual graph to connect some islands and deletes some spurious edges that cross the water around Anchorage. The chain run itself is a pretty standard ReCom setup with a population constraint and a boundary length constraint. After the run finishes, it provides box plots and seats histograms for four different election data sets as well as the proportion of Native populations in each district. These plots are automatically written to file with some summary values and .json files containing the underlying data. 
+  The Alaksa chain reproduces some of the experiments that were carried out in <a href="https://github.com/gerrymandr/Alaska">this paper</a>. It begins by constructing a dual graph for the state directly from the shapefile and then adds in some extra edges to the dual graph to connect some islands and deletes some spurious edges that cross the water around Anchorage. The chain run itself is a pretty standard ReCom setup with a population constraint and a boundary length constraint. The only additional feature here is that at each step of the chain, the FKT algortithm is used to enumerate the number of perfect matchings of the current plat (i.e. the number of possible Senate pairings).  After the run finishes, it provides box plots and seats histograms for four different election data sets as well as the proportion of Native populations in each district. These plots are automatically written to file with some summary values and .json files containing the underlying data. 
   
-  <table>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/ce.png" width = 600/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/mm.png" width = 600/></td></tr>
-   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/sw.png" width = 600/></td>
-        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/eg.png" width = 600/></td></tr>
+ <table>
+  <tr><td> Democratic % </td><td>House Seats</td><td>Competitive Districts</td><td>Number of Matchings</td></tr>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Ensemble_Box_tightGOV18A.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Ensemble_Hist_tightGOV18A.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Ensemble_Comp_tightGOV18A.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Ensemble_Comp_tightedges.png" width = 200/></td></tr>
   </table>
-
   
   <H2> Pennsylvania </H2>
   
