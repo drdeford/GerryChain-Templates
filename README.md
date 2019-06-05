@@ -330,11 +330,10 @@ for z in range(4):
         
         
 <tr><td colspan="2">Democratic %</td><td>Seats trace</td><td>Seats histogram</td></tr>
-  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
+  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_trace.png" width = 200/></td></tr>       
 
 <tr><td>Mean Median trace</td><td>Mean Median histogram</td><td>Efficiency Gap trace</td><td>Efficiency Gap histogram </td></tr>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_hist.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_trace.png" width = 200/></td>
-        <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_hist" width = 200/></td></tr> 
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_hist.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_trace.png" width = 200/></td> <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_hist" width = 200/></td></tr> 
   </table>
 
 
