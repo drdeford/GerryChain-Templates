@@ -7,24 +7,24 @@ These templates assume that you have already installed GerryChain (see <a href="
 ```python
 python grid_chain_simple.py
 ```
-
-The current templates are:
+Here are links to the current templates:
 <ul>
     <li> Grids</li>
     <ul> 
-        <li><b>  grid_chain_simple.py </b> </li>
-        <li><b>  grid_chain_medium.py </b> </li>
-        <li><b>  grid_chain_complicated.py </b> </li>
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_simple.py">grid_chain_simple.py </a> </li>
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_medium.py">  grid_chain_medium.py </a> </li>
+        <li><a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_complicated.py">  grid_chain_complicated.py </a> </li>
     </ul>
     <li> Pennsylvania</li>
     <ul>
-        <li> <b>PA_Chain.py</b></li>
+        <li> <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/Pennsylvania/PA_chain.py">PA_Chain.py</a></li>
     </ul>
     <li> Alaska</li>
     <ul>
-        <li> <b>AK_Chain.py</b></li>
+        <li> <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/Alaska/AK_chain.py">AK_Chain.py</a></li>
     </ul>
 </ul>
+More details about the contents of these files are provided below. 
 
 <H2> Grids are fun! </H2>
 
