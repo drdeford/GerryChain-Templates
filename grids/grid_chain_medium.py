@@ -220,7 +220,7 @@ def propose_spectral_merge(partition):
 
 
 final_chain=MarkovChain(propose_spectral_merge, Validator([]),accept=always_accept,
-initial_state=final_partition, total_steps=100)
+initial_state=final_partition, total_steps=25)
 
 
 for part3 in final_chain:
