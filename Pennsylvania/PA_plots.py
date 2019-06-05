@@ -176,8 +176,8 @@ for j in range(14):
 
     sns.distplot(np.negative(egs[j,:]),bins=1000, kde=False,color='gray')
     plt.title(plan_name + "Plan" + election_names[j])
-    plt.axvline(x=-eegs[j],color='purple',label='2011')
-    plt.axvline(x=-regs[j],color='orange',label='Remedial')
+    plt.axvline(x=eegs[j],color='purple',label='2011')
+    plt.axvline(x=regs[j],color='orange',label='Remedial')
     plt.axvline(x=-np.mean(egs[j,:]),color='g',label='Ensemble Mean')
     plt.ylabel("Frequency")
     plt.xlabel("Efficiency Gap")
@@ -206,8 +206,8 @@ for j in range(14):
 
     sns.distplot(np.negative(mms[j,:]),bins=400, kde=False,color='gray')
     plt.title(plan_name + "Plan" + election_names[j])
-    plt.axvline(x=-emms[j],color='purple',label='2011')
-    plt.axvline(x=-rmms[j],color='orange',label='Remedial')
+    plt.axvline(x=emms[j],color='purple',label='2011')
+    plt.axvline(x=rmms[j],color='orange',label='Remedial')
     plt.axvline(x=-np.mean(mms[j,:]),color='g',label='Ensemble Mean')
     plt.ylabel("Frequency")
     plt.xlabel("Mean-Median")

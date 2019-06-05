@@ -369,7 +369,7 @@ for z in range(1):
         sns.distplot(partisan_w[y],kde=False,color='slateblue',bins=[x for x in range(10,25)],
                                                         hist_kws={"rwidth":1,"align":"left"})
         plt.axvline(x=sum([val>.5 for val in p_vecs[y]]),color='r',label="Current Plan",linewidth=5)
-        plt.axvline(x=np.mean(partisan_w[y]),color='g',label="Matchings Mean",linewidth=5)
+        plt.axvline(x=np.mean(partisan_w[y]),color='g',label="Ensemble Mean",linewidth=5)
         plt.legend()
         print(p_types[y],"wins: ", np.mean(partisan_w[y]))
         plt.savefig("./Outputs/plots/Ensemble_Hist_"+ types[z] + p_types[y] + ".png")
@@ -380,7 +380,7 @@ for z in range(1):
     sns.distplot(wins5,kde=False,color='slateblue',bins=[x for x in range(5)],
                                                     hist_kws={"rwidth":1,"align":"left"})
     plt.axvline(x=2,color='r',label="Current Plan",linewidth=5)
-    plt.axvline(x=np.mean(wins5),color='g',label="Matchigs Mean",linewidth=5)
+    plt.axvline(x=np.mean(wins5),color='g',label="Ensemble Mean",linewidth=5)
     plt.legend()
     print("Native wins: ", np.mean(wins5))
     plt.savefig("./Outputs/plots/Ensemble_Hist_"+ types[z] + "Native.png")
@@ -431,7 +431,7 @@ for z in range(1):
         sns.distplot(comp,kde=False,color='slateblue',bins=[x for x in range(15,35)],
                                                         hist_kws={"rwidth":1,"align":"left"})
         plt.axvline(x=c_init,color='r',label="Current Plan",linewidth=5)
-        plt.axvline(x=np.mean(comp),color='g',label="Matchings Mean",linewidth=5)
+        plt.axvline(x=np.mean(comp),color='g',label="Ensemble Mean",linewidth=5)
         print(p_types[y],"competitive: ",np.mean(comp))
         plt.legend()
         plt.savefig("./Outputs/plots/Ensemble_Comp_"+ types[z] + p_types[y] + ".png")
@@ -464,7 +464,7 @@ for z in range(1):
     sns.distplot(comp,kde=False,color='slateblue',bins=[x for x in range(6)],
                                                     hist_kws={"rwidth":1,"align":"left"})
     plt.axvline(x=0,color='r',label="Current Plan",linewidth=5)
-    plt.axvline(x=np.mean(comp),color='g',label="Matchings Mean",linewidth=5)
+    plt.axvline(x=np.mean(comp),color='g',label="Ensemble Mean",linewidth=5)
     print("Native competitive: ", np.mean(comp))
     plt.legend()
     plt.savefig("./Outputs/plots/Ensemble_Comp_"+ types[z] + "Native.png")
