@@ -317,17 +317,14 @@ for z in range(4):
   
 <table>
  <tr><td>Snapshot 1</td><td>Snapshot 2</td><td>Snapshot 3</td><td>Snapshot 4</td>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot100.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
-   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot300.png" width = 200/></td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot100.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td> <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot300.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot400.png" width = 200/></td></tr>
 <tr><td>Snapshot 5</td><td>Snapshot 6</td><td>Snapshot 7</td><td>Snapshot 8</td>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td></tr>
-   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot700.png" width = 200/></td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot500.png" width = 200/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot700.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot200.png" width = 200/></td></tr>
         
 <tr><td>Snapshot 9</td><td>Snapshot 10</td><td>Boundary Trace</td><td>Boundary Histogram</td>
-  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot900.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td></tr>
-   <tr>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td>
+  <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot900.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/plot1000.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_trace.png" width = 200/></td>
         <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cut_hist.png" width = 200/></td></tr>       
 
   </table>
