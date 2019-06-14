@@ -1,38 +1,18 @@
-import matplotlib.pyplot as plt
-
-plt.switch_backend("agg")
-import pandas as pd
-import geopandas as gpd
-import numpy as np
-import seaborn as sns
 import json
-import networkx as nx
 import time
-
-from gerrychain import Graph, Partition, Election
-from gerrychain.updaters import Tally, cut_edges
-from gerrychain import MarkovChain
-from gerrychain.constraints import single_flip_contiguous
-from gerrychain.proposals import propose_random_flip
-from gerrychain.accept import always_accept
-from gerrychain import (
-    GeographicPartition,
-    Partition,
-    Graph,
-    MarkovChain,
-    proposals,
-    updaters,
-    constraints,
-    accept,
-    Election,
-)
-from gerrychain.constraints.validity import within_percent_of_ideal_population
-
-from gerrychain.proposals import recom
 from functools import partial
 
-from FKT import FKT
+import geopandas as gpd
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+import seaborn as sns
 
+from FKT import FKT
+from gerrychain import (Election, Graph, MarkovChain,
+                        Partition, accept, constraints, updaters)
+from gerrychain.proposals import recom
+from gerrychain.updaters import cut_edges
 
 whole_start = time.time()
 

@@ -14,12 +14,10 @@ Created on Wed May 15 11:54:57 2019
 ########################################################################
 """
 
-import networkx as nx  # Requires at least netwrokx 2.3+
-import matplotlib.pyplot as plt
-import random
+import networkx as nx  # Requires at least networkx 2.3+
 import math
 import numpy as np
-import time
+
 
 # Helper Functions
 def doNothing():
@@ -86,7 +84,6 @@ def isClockwise(e, face):
 # Main Function
 def FKT(A):
     n = len(A)
-    B_graph = A[:]
 
     G = nx.Graph(A)
 
@@ -132,10 +129,10 @@ def FKT(A):
                 index += 1
                 for edge in face:
                     try:
-                        idx1 = edgesT1.index(edge)
+                        edgesT1.index(edge)
                     except ValueError:
                         try:
-                            idx2 = edgesT1.index((edge[1], edge[0]))
+                            edgesT1.index((edge[1], edge[0]))
                         except ValueError:
                             countMissingEdges += 1
                             missingEdge = edge
@@ -151,13 +148,13 @@ def FKT(A):
                     # add this edge to the spanning tree
                     if (numberOfClockwiseEdges(face, edgesT1)) % 2 == 1:
                         # insert counterclockwise in adj_T1;
-                        if isClockwise(missingEdge, face) == False:
+                        if not isClockwise(missingEdge, face):
                             adj_T1[missingEdge[0], missingEdge[1]] = 1
                         else:
                             adj_T1[missingEdge[1], missingEdge[0]] = 1
                     else:
                         # insert clockwise in adj_T1
-                        if isClockwise(missingEdge, face) == True:
+                        if isClockwise(missingEdge, face):
                             adj_T1[missingEdge[0], missingEdge[1]] = 1
                         else:
                             adj_T1[missingEdge[1], missingEdge[0]] = 1
@@ -167,7 +164,7 @@ def FKT(A):
                     edgesT1 = list(T1.edges())
 
                     # remove the face that was found
-                    faceFound = faces.pop(index)
+                    faces.pop(index)
                     break
         try:
             return math.sqrt(np.linalg.det(toSkewSymmetricMatrix(adj_T1)))

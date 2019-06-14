@@ -1,38 +1,23 @@
+import csv
+import os
+from functools import partial
+import json
+
+import geopandas as gpd
 import matplotlib.pyplot as plt
 
-plt.switch_backend("agg")
-import pandas as pd
-import geopandas as gpd
-import numpy as np
-import seaborn as sns
-import json
-import networkx as nx
-import time
-import os
-import csv
-
-
-from gerrychain import Graph, Partition, Election
-from gerrychain.updaters import Tally, cut_edges
-from gerrychain import MarkovChain
-from gerrychain.constraints import single_flip_contiguous
-from gerrychain.proposals import propose_random_flip
-from gerrychain.accept import always_accept
 from gerrychain import (
-    GeographicPartition,
-    Partition,
+    Election,
     Graph,
     MarkovChain,
-    proposals,
-    updaters,
-    constraints,
+    Partition,
     accept,
-    Election,
+    constraints,
+    updaters,
 )
-from gerrychain.constraints.validity import within_percent_of_ideal_population
-from gerrychain.metrics import mean_median, efficiency_gap
+from gerrychain.metrics import efficiency_gap, mean_median
 from gerrychain.proposals import recom
-from functools import partial
+from gerrychain.updaters import cut_edges
 
 newdir = "./Outputs/"
 os.makedirs(os.path.dirname(newdir + "init.txt"), exist_ok=True)
@@ -48,11 +33,8 @@ df = gpd.read_file(plot_path)
 
 
 def num_splits(partition):
-
     df["current"] = df[unique_label].map(dict(partition.assignment))
-
     splits = sum(df.groupby("COUNTYFP10")["current"].nunique() > 1)
-
     return splits
 
 

@@ -1,17 +1,13 @@
-import geopandas as gpd
-import numpy as np
-import matplotlib
+# sns.set_style('white')
+import os
 
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import numpy as np
 import seaborn as sns
+
 
 # sns.set_style('darkgrid')
 sns.set_style("darkgrid", {"axes.facecolor": ".97"})
-# sns.set_style('white')
-import json
-import os
 
 
 num_elections = 14
