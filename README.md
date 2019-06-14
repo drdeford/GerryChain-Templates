@@ -1,13 +1,25 @@
 # GerryChain-Templates
-This repo provides an evolving set of instructional guides for using the <a href="https://github.com/mggg/GerryChain">GerryChain</a> package for generating dual graph partitions. More detailed technical documentation can be found <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and my introduction to the mathematics of Markov chains and MCMC for redistrcitng can be found here: (<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>) (<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>) (<a href="https://github.com/drdeford/MCMC_Intro">GitHub</a>).
+
+This repo provides an evolving set of instructional guides for using the
+<a href="https://github.com/mggg/GerryChain">GerryChain</a> package for
+generating dual graph partitions. More detailed technical documentation can be
+found
+<a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> and
+my introduction to the mathematics of Markov chains and MCMC for redistrcitng
+can be found here:
+(<a href="https://people.csail.mit.edu/ddeford/MCMC_Intro_plus.pdf">pdf</a>)
+(<a href="https://people.csail.mit.edu/ddeford/mcmc_intro.php">webpage</a>)
+(<a href="https://github.com/drdeford/MCMC_Intro">GitHub</a>).
 
 <H2> Overview </H2>
-These templates assume that you have already installed GerryChain (see <a href="https://github.com/mggg/GerryChain">here</a> or <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> for directions) and are ready to start building your own ensembles. Since some of the examples use real-world data, you should clone this repo to your computer - this will also make it easy to get access to updates to the templates. Once you have downloaded everything you should be able to run the templates individually by navigating to the appropriate subfolder and entering: 
+These templates assume that you have already installed GerryChain (see <a href="https://github.com/mggg/GerryChain">here</a> or <a href="https://people.csail.mit.edu/ddeford/GerryChain_Guide.pdf">here</a> for directions) and are ready to start building your own ensembles. Since some of the examples use real-world data, you should clone this repo to your computer - this will also make it easy to get access to updates to the templates. Once you have downloaded everything you should be able to run the templates individually by navigating to the appropriate subfolder and entering:
 
 ```python
 python grid_chain_simple.py
 ```
+
 Here are links to the current templates:
+
 <ul>
     <li><b> Grids</b></li>
     <ul> 
@@ -24,11 +36,15 @@ Here are links to the current templates:
         <li> <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/Alaska/AK_chain.py">AK_Chain.py</a></li>
     </ul>
 </ul>
-More details about the contents of these files are provided below the simple grids example. 
+More details about the contents of these files are provided below the simple grids example.
 
 <H2> Grids are fun! </H2>
 
-The best place to start is with the <a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_simple.py">simple grids example</a>. This template breaks the code into pieces, building the graph and partition components separately before doing a couple of small runs to compare ReCom to Flip. We start by importing the packages we need:
+The best place to start is with the
+<a href="https://github.com/drdeford/GerryChain-Templates/blob/master/grids/grid_chain_simple.py">simple
+grids example</a>. This template breaks the code into pieces, building the graph
+and partition components separately before doing a couple of small runs to
+compare ReCom to Flip. We start by importing the packages we need:
 
 ```python
 import os
@@ -62,7 +78,7 @@ from gerrychain.proposals import recom
 from gerrychain.metrics import mean_median, efficiency_gap
 ```
 
-Next we build a gn x k by gn x k graph split into k vertical columns: 
+Next we build a gn x k by gn x k graph split into k vertical columns:
 
 ```python
 
@@ -82,7 +98,7 @@ graph=nx.grid_graph([k*gn,k*gn])
 for n in graph.nodes():
     graph.node[n]["population"]=1
 
-   
+
     if random.random()<p:
         graph.node[n]["pink"]=1
         graph.node[n]["purple"]=0
@@ -105,14 +121,14 @@ for n in graph.nodes():
 #        if j >0:
 #            graph.add_edge((i,j),(i+1,j-1))
 #            graph[(i,j)][(i+1,j-1)]["shared_perim"]=0
-        
-        
-        
+
+
+
 ########## BUILD ASSIGNMENT
-cddict = {x: int(x[0]/gn)  for x in graph.nodes()}        
+cddict = {x: int(x[0]/gn)  for x in graph.nodes()}
 
 ######PLOT GRIDS
-        
+
 plt.figure()
 nx.draw(graph, pos = {x:x for x in graph.nodes()} ,node_size = ns, node_shape ='s')
 plt.show()
@@ -132,9 +148,8 @@ plt.show()
   <tr><td> Original Graph </td><td>Random Vote Data</td><td>Initial Partition</td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/Original_Grid.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/PP_votes.png" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/initial_partition.png" width = 300/></td></tr>
   </table>
-  
 
-Next we configure the partitions, updaters, and constraints. 
+Next we configure the partitions, updaters, and constraints.
 
 ```python
 
@@ -152,16 +167,16 @@ def step_num(partition):
 updaters = {'population': Tally('population'),
                     'cut_edges': cut_edges,
                     'step_num': step_num,
-                    "Pink-Purple": Election("Pink-Purple", {"Pink":"pink","Purple":"purple"})}                  
-                    
-                    
+                    "Pink-Purple": Election("Pink-Purple", {"Pink":"pink","Purple":"purple"})}
+
+
 
 #########BUILD PARTITION
 
 grid_partition = Partition(graph,assignment=cddict,updaters=updaters)
 
 #ADD CONSTRAINTS
-popbound=within_percent_of_ideal_population(grid_partition,.1)                      
+popbound=within_percent_of_ideal_population(grid_partition,.1)
 
 #########Setup Proposal
 ideal_population = sum(grid_partition["population"].values()) / len(grid_partition)
@@ -172,7 +187,7 @@ tree_proposal = partial(recom,
                        epsilon=0.05,
                        node_repeats=1
                       )
-                      
+
 #######BUILD MARKOV CHAINS
 
 
@@ -184,7 +199,10 @@ initial_state=grid_partition, total_steps=10000)
 
 ```
 
-Finally, we run two chains, one with each proposal method, and record a variety of statistics. The final state of each of the two chains will be displayed. Notice that even though the ReCom chain only takes 100 steps, it travels much further than the 10,000 step boundary chain. 
+Finally, we run two chains, one with each proposal method, and record a variety
+of statistics. The final state of each of the two chains will be displayed.
+Notice that even though the ReCom chain only takes 100 steps, it travels much
+further than the 10,000 step boundary chain.
 
 ```python
 #########Run MARKOV CHAINS
@@ -205,7 +223,7 @@ for part in recom_chain:
     plt.savefig(f"./Figures/recom_{part['step_num']:02d}.png")
     plt.close()
     """
-    
+
 plt.figure()
 nx.draw(graph, pos = {x:x for x in graph.nodes()}, node_color = [dict(part.assignment)[x] for x in graph.nodes()] ,node_size = ns, node_shape ='s',cmap = 'tab20')
 plt.show()
@@ -238,8 +256,8 @@ plt.show()
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/recom.gif" width = 300/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/smaller_boundary.gif" width = 300/></td></tr>
   </table>
 
-
-After the chain runs, we make some plots comparing the behavior of the ensembles. 
+After the chain runs, we make some plots comparing the behavior of the
+ensembles.
 
 ```python
 ##################Partisan Plots
@@ -251,11 +269,11 @@ lists = [[rce, bce], [rmm, bmm], [rsw, bsw], [reg, beg]]
 for z in range(4):
     plt.figure()
     plt.suptitle(f"{names[z]} Comparison")
-    
+
     plt.subplot(2, 2, 1)
     plt.plot(lists[z][0])
-    
-    
+
+
 
     plt.subplot(2, 2, 3)
     plt.hist(lists[z][0])
@@ -299,7 +317,6 @@ for z in range(4):
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle4000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/middle5000002_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/flips_40_5pop.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/cuts_40_5pop.png" width = 200/></td></tr>
   </table>
 
-
   <H2> Alaska </H2>
   
   The Alaksa chain reproduces some of the experiments that were carried out in <a href="https://github.com/gerrymandr/Alaska">this paper</a>. It begins by constructing a dual graph for the state directly from the shapefile and then adds in some extra edges to the dual graph to connect some islands and deletes some spurious edges that cross the water around Anchorage. The chain run itself is a pretty standard ReCom setup with a population constraint and a boundary length constraint. The only additional feature here is that at each step of the chain, the FKT algortithm is used to enumerate the number of perfect matchings of the current plat (i.e. the number of possible Senate pairings).  After the run finishes, it provides box plots and seats histograms for four different election data sets as well as the proportion of Native populations in each district. These plots are automatically written to file with some summary values and .json files containing the underlying data. 
@@ -328,16 +345,8 @@ for z in range(4):
         
         
 <tr><td colspan="2">Democratic %</td><td>Seats trace</td><td>Seats histogram</td></tr>
-  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_hist.png" width = 200/></td></tr>       
+  <tr><td colspan="2"><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216_box2.png" width = 400/></td>  <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216seats_hist.png" width = 200/></td></tr>
 
 <tr><td>Mean Median trace</td><td>Mean Median histogram</td><td>Efficiency Gap trace</td><td>Efficiency Gap histogram </td></tr>
   <tr><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_trace.png" width = 200/></td><td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216mm_hist.png" width = 200/></td>   <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_trace.png" width = 200/></td> <td><img src="https://raw.githubusercontent.com/drdeford/GerryChain-Templates/master/Figures/SENW101216eg_hist.png" width = 200/></td></tr> 
   </table>
-
-
-  
-  
-  
-
-
-
