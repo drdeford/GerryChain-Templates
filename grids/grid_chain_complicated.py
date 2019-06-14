@@ -1,7 +1,6 @@
 # Import for I/O
 
 import random
-import geopandas as gp
 
 # import matplotlib
 # matplotlib.use("Agg")
@@ -27,6 +26,50 @@ from gerrychain.accept import always_accept
 from gerrychain.updaters import Tally, cut_edges
 from gerrychain.partition import Partition
 import networkx as nx
+
+
+def create_graph():
+    graph = nx.grid_graph([k * gn, k * gn])
+
+    for e in graph.edges():
+        graph[e[0]][e[1]]["shared_perim"] = 1
+
+    graph.remove_nodes_from(
+        [(0, 0), (0, k * gn - 1), (k * gn - 1, 0), (k * gn - 1, k * gn - 1)]
+    )
+
+    cddict = {x: int(x[0] / gn) for x in graph.nodes()}
+
+    for n in graph.nodes():
+        graph.node[n]["population"] = 1
+        graph.node[n]["part_sum"] = cddict[n]
+        graph.node[n]["last_flipped"] = 0
+        graph.node[n]["num_flips"] = 0
+
+        if random.random() < p:
+            graph.node[n]["pink"] = 1
+            graph.node[n]["purple"] = 0
+        else:
+            graph.node[n]["pink"] = 0
+            graph.node[n]["purple"] = 1
+        if 0 in n or k * gn - 1 in n:
+            graph.node[n]["boundary_node"] = True
+            graph.node[n]["boundary_perim"] = 1
+
+        else:
+            graph.node[n]["boundary_node"] = False
+
+    # this part adds queen adjacency
+    # for i in range(gn-1):
+    #    for j in range(gn):
+    #        if j<(gn-1):
+    #            graph.add_edge((i,j),(i+1,j+1))
+    #            graph[(i,j)][(i+1,j+1)]["shared_perim"]=0
+    #        if j >0:
+    #            graph.add_edge((i,j),(i+1,j-1))
+    #            graph[(i,j)][(i+1,j-1)]["shared_perim"]=0
+
+    return graph, cddict
 
 
 def step_num(partition):
@@ -158,19 +201,6 @@ def annealing_cut_accept2(partition):
     return random.random() < bound
 
 
-def boundary_condition(partition):
-    out = 0
-    bounds = {
-        partition.assignment[n]
-        for n in partition.graph.nodes()
-        if partition.graph.node(n)["boundary_node"] is True
-    }
-    if 1 in bounds and -1 in bounds:
-        out = 1
-
-    return out
-
-
 gn = 10
 k = 5
 ns = 200
@@ -180,52 +210,13 @@ for exp_num in [40, 20, 1]:  # range(22,31):
 
     for pop_bal in [5, 10, 50]:  # [10,15,20,25,30,35,40,45,50]
         base = exp_num / 10  # 1/math.pi
-        graph = nx.grid_graph([k * gn, k * gn])
-
-        for e in graph.edges():
-            graph[e[0]][e[1]]["shared_perim"] = 1
-
-        graph.remove_nodes_from(
-            [(0, 0), (0, k * gn - 1), (k * gn - 1, 0), (k * gn - 1, k * gn - 1)]
-        )
-
-        cddict = {x: int(x[0] / gn) for x in graph.nodes()}
-
-        for n in graph.nodes():
-            graph.node[n]["population"] = 1
-            graph.node[n]["part_sum"] = cddict[n]
-            graph.node[n]["last_flipped"] = 0
-            graph.node[n]["num_flips"] = 0
-
-            if random.random() < p:
-                graph.node[n]["pink"] = 1
-                graph.node[n]["purple"] = 0
-            else:
-                graph.node[n]["pink"] = 0
-                graph.node[n]["purple"] = 1
-            if 0 in n or k * gn - 1 in n:
-                graph.node[n]["boundary_node"] = True
-                graph.node[n]["boundary_perim"] = 1
-
-            else:
-                graph.node[n]["boundary_node"] = False
-
-        # this part adds queen adjacency
-        # for i in range(gn-1):
-        #    for j in range(gn):
-        #        if j<(gn-1):
-        #            graph.add_edge((i,j),(i+1,j+1))
-        #            graph[(i,j)][(i+1,j+1)]["shared_perim"]=0
-        #        if j >0:
-        #            graph.add_edge((i,j),(i+1,j-1))
-        #            graph[(i,j)][(i+1,j-1)]["shared_perim"]=0
+        graph, cddict = create_graph()
 
         # Necessary updaters go here
         updaters = {
             "population": Tally("population"),
             "cut_edges": cut_edges,
             "step_num": step_num,
-            # 'boundaries': boundaries
         }
         # updaters={}
 
@@ -283,9 +274,7 @@ for exp_num in [40, 20, 1]:  # range(22,31):
         )
         plt.close()
 
-        gpartition = Partition(
-            graph, assignment=dict(part3.assignment), updaters=updaters
-        )
+        gp = Partition(graph, assignment=dict(part3.assignment), updaters=updaters)
 
         popbound = within_percent_of_ideal_population(gp, pop_bal / 100)
 
@@ -293,7 +282,7 @@ for exp_num in [40, 20, 1]:  # range(22,31):
             slow_reversible_propose,  # propose_random_flip,#propose_chunk_flip, # ,
             Validator([single_flip_contiguous, popbound]),
             accept=annealing_cut_accept2,  # aca,#cut_accept,#always_accept,#
-            initial_state=gpartition,
+            initial_state=gp,
             total_steps=500000,
         )
 

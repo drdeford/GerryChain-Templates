@@ -100,7 +100,7 @@ tree_proposal = partial(
 
 recom_chain = MarkovChain(
     tree_proposal,
-    Validator([popbound]),
+    constraints=[popbound],
     accept=always_accept,
     initial_state=grid_partition,
     total_steps=100,
