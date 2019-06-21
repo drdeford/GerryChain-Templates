@@ -33,7 +33,7 @@ from gerrychain.tree import recursive_tree_part
 state_abbr = "MS"
 housen = "HOU"
 state_fip = "28"
-num_districts = 52
+num_districts = 4
 
 
 
@@ -101,11 +101,6 @@ updater = {
     "cut_edges": cut_edges,
     "BVAP":Election("BVAP",{"BVAP":"BVAP","nBVAP":"nBVAP"})
             }
-
-
-tally_updaters = {col:updaters.Tally(col) for col in cols}
-
-updater.update(tally_updaters)
 
 
 initial_partition = Partition(graph, cddict, updater)
