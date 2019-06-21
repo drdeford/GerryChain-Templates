@@ -9,7 +9,7 @@ import csv
 import os
 from functools import partial
 import json
-
+import numpy as np
 import geopandas as gpd
 import matplotlib
 #matplotlib.use('Agg')
@@ -164,7 +164,7 @@ plt.close()
 plt.figure()
 plt.hist(cuts)
 plt.show()
-
+c='k'
 plt.figure()
 plt.boxplot(
             np.array(BVAPS),
