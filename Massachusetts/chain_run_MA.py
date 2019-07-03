@@ -47,7 +47,7 @@ with open(newdir + "init.txt", "w") as f:
 
 
 
-graph = Graph.from_json("./Data/MA_2010.json")
+graph = Graph.from_json("./Data/MA2010.json")
 
 
 df = gpd.read_file("./Data/MA_precincts_12_16.shp")
@@ -60,10 +60,6 @@ pop_col = "TOTPOP"
 
 #df["nWHITE"] = df["TOTPOP"] - df["WHITE"]
 import pandas as pd
-
-
-for n in graph.nodes():
-    graph.node[n]["nBVAP"] = graph.node[n]["VAP"] - graph.node[n]["BVAP"]
 
 num_elections = 6
 
@@ -86,12 +82,27 @@ election_columns = [
     ]
 
 
+totpop = 0 
+for n in graph.nodes():
+    graph.node[n]["TOTPOP"] = int(graph.node[n]["TOTPOP"])
+    graph.node[n]["VAP"] = int(graph.node[n]["VAP"])
+    graph.node[n]["BVAP"] = int(graph.node[n]["BVAP"])
+    for i in range(1,num_elections):
+        for j in election_columns[i]:
+            graph.node[n][j] = int(graph.node[n][j].replace(',', ''))
+
+
+    graph.node[n]["nBVAP"] = graph.node[n]["VAP"] - graph.node[n]["BVAP"]
+    totpop+= graph.node[n]["TOTPOP"]
+
+
+
     
     
 
 
 for i in range(1):
-    cddict =  recursive_tree_part(graph,range(num_districts),df["TOTPOP"].sum()/num_districts,"TOTPOP", .001,1)
+    cddict =  recursive_tree_part(graph,range(num_districts),totpop/num_districts,"TOTPOP", .01,1)
     
     df["initial"]=df.index.map(cddict)
     
