@@ -47,7 +47,7 @@ with open(newdir + "init.txt", "w") as f:
 
 
 
-graph = graph.from_json("./Data/MA_2010.json")
+graph = Graph.from_json("./Data/MA_2010.json")
 
 
 df = gpd.read_file("./Data/MA_precincts_12_16.shp")
