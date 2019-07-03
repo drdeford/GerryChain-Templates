@@ -9,7 +9,7 @@ import csv
 import os
 from functools import partial
 import json
-
+import numpy as np
 import geopandas as gpd
 import matplotlib
 #matplotlib.use('Agg')
@@ -33,7 +33,7 @@ from gerrychain.tree import recursive_tree_part
 state_abbr = "MS"
 housen = "HOU"
 state_fip = "28"
-num_districts = 52
+num_districts = 4
 
 
 
@@ -103,11 +103,6 @@ updater = {
             }
 
 
-tally_updaters = {col:updaters.Tally(col) for col in cols}
-
-updater.update(tally_updaters)
-
-
 initial_partition = Partition(graph, cddict, updater)
 
 ideal_population = sum(initial_partition["population"].values()) / len(
@@ -169,7 +164,7 @@ plt.close()
 plt.figure()
 plt.hist(cuts)
 plt.show()
-
+c='k'
 plt.figure()
 plt.boxplot(
             np.array(BVAPS),
