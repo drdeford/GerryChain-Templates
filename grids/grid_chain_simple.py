@@ -74,7 +74,7 @@ plt.figure()
 nx.draw(
     graph,
     pos={x: x for x in graph.nodes()},
-    node_color=[cdict[graph.node[x]["pink"]] for x in graph.nodes()],
+    node_color=[cdict[graph.nodes[x]["pink"]] for x in graph.nodes()],
     node_size=ns,
     node_shape="s",
 )
