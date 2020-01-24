@@ -29,20 +29,20 @@ p = 0.5
 graph = nx.grid_graph([k * gn, k * gn])
 
 for n in graph.nodes():
-    graph.node[n]["population"] = 1
+    graph.nodes[n]["population"] = 1
 
     if random.random() < p:
-        graph.node[n]["pink"] = 1
-        graph.node[n]["purple"] = 0
+        graph.nodes[n]["pink"] = 1
+        graph.nodes[n]["purple"] = 0
     else:
-        graph.node[n]["pink"] = 0
-        graph.node[n]["purple"] = 1
+        graph.nodes[n]["pink"] = 0
+        graph.nodes[n]["purple"] = 1
     if 0 in n or k * gn - 1 in n:
-        graph.node[n]["boundary_node"] = True
-        graph.node[n]["boundary_perim"] = 1
+        graph.nodes[n]["boundary_node"] = True
+        graph.nodes[n]["boundary_perim"] = 1
 
     else:
-        graph.node[n]["boundary_node"] = False
+        graph.nodes[n]["boundary_node"] = False
 
 # this part adds queen adjacency
 # for i in range(k * gn - 1):
